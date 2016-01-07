@@ -1,5 +1,6 @@
 package com.example.horinoa.mykotlin;
 
+import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,7 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mcounttext = (TextView)findViewById(R.id.Counttext);
 
         mMydata = new Mydata();
-        //MylistFragment mylistFragmeny = getSupportFragmentManager().findFragmentById(R.id.listfragment)
+
+        if (savedInstanceState == null){
+            MylistFragment mylistFragment = new MylistFragment();
+            FragmentManager ft = getFragmentManager();
+            ft.beginTransaction().replace(R.id.container, mylistFragment).commit();
+        }
     }
 
     @Override
@@ -54,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.listchangebuttom:
                 MylistFragment mylistFragment = (MylistFragment) getFragmentManager().
-                                                findFragmentById(R.id.listfragment);
+                                                findFragmentById(R.id.container);
                 mylistFragment.reflashListFragment();
                 break;
             default:
